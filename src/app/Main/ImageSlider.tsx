@@ -12,14 +12,23 @@ interface slide {
 }
 type prop = {
   images: slide[];
+  handleItem?: (item: number) => void;
 };
 
-const ImageSlider = ({ images }: prop) => {
+const ImageSlider = ({ images, handleItem }: prop) => {
   const [current, setcurrent] = useState(0);
   const nextSlide = () =>
-    setcurrent((prev: number) => (prev + 1) % images.length);
+    setcurrent((prev: number) => {
+      const newIndex = (prev + 1) % images.length;
+      handleItem?.(newIndex)
+      return newIndex;
+    });
   const prevSlide = () =>
-    setcurrent((prev: number) => (prev - 1 + images.length) % images.length);
+    setcurrent((prev: number) => {
+      const newIndex = (prev - 1 + images.length) % images.length;
+      handleItem?.(newIndex)
+      return newIndex;
+    });
 
   useEffect(() => {
     const hnadleKeyDown = (event: KeyboardEvent) => {
@@ -37,7 +46,7 @@ const ImageSlider = ({ images }: prop) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 relative">
+    <div className="flex flex-col items-center justify-center p-4 relative drop-shadow-custom-indigo">
       <AnimatePresence mode="wait">
         <motion.div>
           <motion.img
@@ -48,22 +57,23 @@ const ImageSlider = ({ images }: prop) => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3 }}
-            className="w-full h-auto rounded-xl shadow-md cursor-grab active:cursor-grabbing"
+            transition={{ duration: 0.5 }}
+            className="w-full h-auto rounded-lg  cursor-grab active:cursor-grabbing
+           "
             src={images[current].image}
             alt={images[current].name}
           />
         </motion.div>
       </AnimatePresence>
       <section
-        className="bg-white p-3 flex items-center justify-center gap-8
-       rounded-full shadow-md absolute bottom-0"
+        className="bg-white py-2 px-3 flex items-center justify-center gap-6
+       rounded-full shadow-md  absolute bottom-0"
       >
         <button onClick={prevSlide} className="outline-none ">
-          <Image src={previous} alt="prev icon" />
+          <Image src={previous} alt="prev icon" className="w-3 h-auto" />
         </button>
         <button onClick={nextSlide} className="outline-none">
-          <Image src={next} alt="next icon" />
+          <Image src={next} alt="next icon" className="w-3 h-auto"/>
         </button>
       </section>
     </div>

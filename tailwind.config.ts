@@ -17,6 +17,14 @@ export default {
       fontFamily: {
         inter: ['Inter','sans-serif'],
       },
+      backgroundImage:{
+        pattern : "url('../../public/sources/images/pattern-bg.svg')",
+        quote : "url('../../public/sources/images/pattern-quotes.svg')",
+        curve : "url('../../public/sources/images/pattern-curve.svg')",
+      }, 
+      dropShadow:{
+        'custom-indigo': '0px 10px 10px rgba(55, 48, 163, 0.3)',
+      }
     },
   },
   plugins: [],
