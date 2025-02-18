@@ -18,17 +18,13 @@ type prop = {
 const ImageSlider = ({ images, handleItem }: prop) => {
   const [current, setcurrent] = useState(0);
   const nextSlide = () =>
-    setcurrent((prev: number) => {
-      const newIndex = (prev + 1) % images.length;
-      handleItem?.(newIndex)
-      return newIndex;
-    });
+    setcurrent((prev: number) => (prev + 1) % images.length);
   const prevSlide = () =>
-    setcurrent((prev: number) => {
-      const newIndex = (prev - 1 + images.length) % images.length;
-      handleItem?.(newIndex)
-      return newIndex;
-    });
+    setcurrent((prev: number) => (prev - 1 + images.length) % images.length);
+
+  useEffect(() => {
+    handleItem?.(current);
+  }, [current]);
 
   useEffect(() => {
     const hnadleKeyDown = (event: KeyboardEvent) => {
@@ -72,7 +68,7 @@ const ImageSlider = ({ images, handleItem }: prop) => {
           <Image src={previous} alt="prev icon" className="w-3 h-auto" />
         </button>
         <button onClick={nextSlide} className="outline-none">
-          <Image src={next} alt="next icon" className="w-3 h-auto"/>
+          <Image src={next} alt="next icon" className="w-3 h-auto" />
         </button>
       </section>
     </div>
