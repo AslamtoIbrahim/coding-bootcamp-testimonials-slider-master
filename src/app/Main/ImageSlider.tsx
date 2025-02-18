@@ -39,7 +39,7 @@ const ImageSlider = ({ images, handleItem }: prop) => {
     return () => window.removeEventListener("keydown", hnadleKeyDown);
   }, []);
 
-  //   swipe gesture
+  //   swipe gesture using mouse or trackpad
   const handleDrag = (_event: unknown, info: { offset: { x: number } }) => {
     if (info.offset.x < -50) nextSlide();
     if (info.offset.x > 50) prevSlide();
@@ -58,8 +58,7 @@ const ImageSlider = ({ images, handleItem }: prop) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
-            className="w-full h-auto rounded-lg  cursor-grab active:cursor-grabbing
-           "
+            className="w-full h-auto rounded-lg  cursor-grab active:cursor-grabbing"
             src={images[current].image}
             alt={images[current].name}
           />
@@ -67,7 +66,7 @@ const ImageSlider = ({ images, handleItem }: prop) => {
       </AnimatePresence>
       <section
         className="bg-white py-2 px-3 flex items-center justify-center gap-6
-       rounded-full shadow-md  absolute bottom-0"
+       rounded-full shadow-md  absolute bottom-0 lg:left-24 xl:left-48 2xl:left-[9rem] lg:py-3 lg:px-4"
       >
         <button onClick={prevSlide} className="outline-none ">
           <Image src={previous} alt="prev icon" className="w-3 h-auto" />
