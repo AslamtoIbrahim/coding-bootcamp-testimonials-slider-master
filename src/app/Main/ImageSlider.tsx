@@ -62,7 +62,7 @@ const ImageSlider = ({ images, handleItem }: prop) => {
       </AnimatePresence>
       <section
         className="bg-white py-2 px-3 flex items-center justify-center gap-6
-       rounded-full shadow-md  absolute bottom-0 lg:left-24 xl:left-48 2xl:left-[25rem] lg:py-3 lg:px-4"
+       rounded-full shadow-md  absolute bottom-0 lg:left-24 xl:left-48 2xl:left-[23rem] lg:py-3 lg:px-4"
       >
         <button onClick={prevSlide} className="outline-none ">
           <Image src={previous} alt="prev icon" className="w-3 h-auto" />
